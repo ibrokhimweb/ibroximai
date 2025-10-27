@@ -51,22 +51,6 @@ bot.callbackQuery("confirm_subscription", confirmSubscription);
 
 bot.command("start", startCommand);
 
-bot.command("getmusic", async (ctx) => {
-  try {
-    const msg = await ctx.reply(
-      "⏳ Kuting... so‘nggi 3 ta musiqa olinmoqda..."
-    );
-
-    await ctx.replyWithVideo(`https://t.me/SoundMediaDB/167`);
-    await msg.message_id.toExponential();
-  } catch (err) {
-    console.error("❌ Xatolik:", err);
-    await ctx.reply(
-      "❌ Xatolik yuz berdi. Balki kanal yopiq yoki post o‘chirilgan bo‘lishi mumkin."
-    );
-  }
-});
-
 bot.use(ensurePhone);
 bot.use(checkSubscription);
 

@@ -39,6 +39,7 @@ export const checkSubscription = async (ctx: Context, next: NextFunction) => {
       "❗ Botdan foydalanish uchun quyidagi kanallarga obuna bo‘lishingiz kerak:",
       { reply_markup: keyboard }
     );
+    return;
   }
 
   await next();
