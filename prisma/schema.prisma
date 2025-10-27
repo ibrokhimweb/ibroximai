@@ -1,0 +1,35 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id           Int       @id @default(autoincrement())
+    telegram_id  String    @unique
+    username     String?   @unique
+    first_name   String?
+    last_name    String?
+    language     String    @default("uz")
+    is_premium   Boolean   @default(false)
+    email        String?
+    phone        String?
+    latitude     Float?
+    longitude    Float?
+    status       Int       @default(0)
+    role         String    @default("user")
+    created_by   Int
+    updated_by   Int?
+    created_date DateTime  @default(now())
+    updated_date DateTime? @updatedAt
+}
+
+model Music {
+    id     Int    @id @default(autoincrement())
+    name   String
+    doc_id String
+    size   Float
+}

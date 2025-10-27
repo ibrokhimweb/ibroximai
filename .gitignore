@@ -1,0 +1,104 @@
+# =====================================
+# 🌙 Universal Node.js + TypeScript + Prisma project
+# Author: Ibroxim
+# =====================================
+
+# ----------------------------
+# 📦 Node modules & build output
+# ----------------------------
+node_modules/
+dist/
+build/
+out/
+
+# ----------------------------
+# ⚙️ Environment files
+# ----------------------------
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ----------------------------
+# 🧰 TypeScript
+# ----------------------------
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ----------------------------
+# 🧱 Logs
+# ----------------------------
+npm-debug.log*
+yarn.lock
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+logs/
+debug.log
+error.log
+
+# ----------------------------
+# 🪄 IDE & OS
+# ----------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ----------------------------
+# 🧩 Prisma
+# ----------------------------
+generated
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/
+# Uncomment this if migrations should not be committed:
+# !prisma/migrations/
+
+# ----------------------------
+# 🧾 Temporary files
+# ----------------------------
+*.tmp
+*.temp
+*.bak
+*.old
+
+# ----------------------------
+# 🧰 Testing & coverage
+# ----------------------------
+coverage/
+.nyc_output/
+jest-html-reporters-*.html
+
+# ----------------------------
+# 🔐 Security
+# ----------------------------
+*.pem
+*.key
+*.crt
+*.p12
+*.cer
+
+# ----------------------------
+# 🚀 Deployment / CI
+# ----------------------------
+.gitlab-ci-local/
+.vercel/
+.netlify/
+.next/
+.cache/
+pm2.log
+
+# ----------------------------
+# 🧠 Custom Project Specific
+# ----------------------------
+data/
+uploads/
+cache/
+sessions/
+scraped/

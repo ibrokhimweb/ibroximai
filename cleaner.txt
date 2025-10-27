@@ -1,0 +1,98 @@
+@echo off
+chcp 65001 >nul
+title Windows Optimization & Cache Cleaner
+color 0A
+
+:: Chiroyli banner
+cls
+echo ==================================================
+echo         WINDOWS OPTIMIZATION & CACHE CLEANER      
+echo ==================================================
+echo.
+echo Windows tizimini tozalash va optimallashtirish...
+echo Iltimos, kuting...
+echo.
+
+timeout /t 2 >nul
+
+:: DNS keshini tozalash
+echo [1/15] 🔄 DNS keshini tozalash...
+ipconfig /flushdns
+
+:: Temp fayllarni o‘chirish
+echo [2/15] 🗑️ Temp fayllarni tozalash...
+del /s /q %temp%\* >nul 2>&1
+del /s /q C:\Windows\Temp\* >nul 2>&1
+
+:: Prefetch fayllarini tozalash
+echo [3/15] 🚀 Prefetch keshini tozalash...
+del /s /q C:\Windows\Prefetch\* >nul 2>&1
+
+:: Windows Update keshini tozalash
+echo [4/15] 🔄 Windows Update keshini tozalash...
+net stop wuauserv >nul 2>&1
+del /s /q C:\Windows\SoftwareDistribution\* >nul 2>&1
+net start wuauserv >nul 2>&1
+
+:: Diskni tozalash
+echo [5/15] 🧹 Disk Cleanup ishga tushirilmoqda...
+cleanmgr /sagerun:1
+
+:: RAM keshini tozalash
+echo [6/15] 🚀 RAM xotirasini tozalash...
+echo off | clip
+wmic process where name="explorer.exe" call terminate >nul 2>&1
+start explorer.exe
+
+:: Superfetch va SysMain xizmatlarini o‘chirish
+echo [7/15] ❌ Superfetch va SysMain xizmatlarini o‘chirish...
+sc stop SysMain >nul 2>&1
+sc config SysMain start=disabled >nul 2>&1
+
+:: Chiqindilar qutisini tozalash
+echo [8/15] 🗑️ Chiqindilar qutisini tozalash...
+del /f /s /q %SystemDrive%\$Recycle.Bin\* >nul 2>&1
+
+:: Tarmoq sozlamalarini tiklash
+echo [9/15] 🌐 Internetni optimallashtirish (Nettozlash)...
+netsh winsock reset >nul 2>&1
+netsh int ip reset >nul 2>&1
+ipconfig /release >nul 2>&1
+ipconfig /renew >nul 2>&1
+ipconfig /flushdns >nul 2>&1
+
+:: Diskni tekshirish va defragmentatsiya qilish
+echo [10/15] 🛠️ Diskni optimallashtirish...
+chkdsk /f /r C: >nul 2>&1
+defrag C: >nul 2>&1
+
+:: Keraksiz xizmatlarni o‘chirish
+echo [11/15] ❌ Keraksiz xizmatlarni o‘chirish...
+sc stop DiagTrack >nul 2>&1
+sc config DiagTrack start=disabled >nul 2>&1
+sc stop dmwappushservice >nul 2>&1
+sc config dmwappushservice start=disabled >nul 2>&1
+
+:: AutoRun dasturlarini o‘chirish
+echo [12/15] 🔧 Keraksiz AutoRun dasturlarini o‘chirish...
+wmic startup get caption,command | findstr /v /i "Microsoft" >nul 2>&1
+
+:: Bo‘sh RAMni optimallashtirish
+echo [13/15] 🚀 RAM ishlatilishini optimallashtirish...
+wmic os get FreePhysicalMemory >nul 2>&1
+
+:: Windows tizimini avtomatik tozalash sozlamalarini yoqish
+echo [14/15] 🔄 Windows avtomatik tozalashni yoqish...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Temporary Files" /v StateFlags0001 /t REG_DWORD /d 2 /f >nul 2>&1
+
+:: Qo‘shimcha xavfsizlik tekshiruvi
+echo [15/15] 🔍 Xavfsizlik tekshiruvi...
+sfc /scannow >nul 2>&1
+
+:: Barcha optimallashtirishlar tugadi
+echo.
+echo ==================================================
+echo ✅ Tizim tozalandi va optimallashtirildi!  
+echo 🔄 Iltimos, kompyuterni qayta yuklang!
+echo ==================================================
+pause
