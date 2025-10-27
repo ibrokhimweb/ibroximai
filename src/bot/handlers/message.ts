@@ -112,7 +112,6 @@ export const messageHandler = async (ctx: Context, next: NextFunction) => {
                   },
                   { text: "📜 Shartlar", callback_data: "bonus_terms" },
                 ],
-                [{ text: "⬅️ Ortga", callback_data: "back_main_menu" }],
               ],
             },
           }
