@@ -69,6 +69,31 @@ bot.on("message:text", async (ctx, next) => {
   }
 });
 
+bot.on("callback_query:data", async (ctx) => {
+  const data = ctx.callbackQuery.data;
+
+  const pendingCallbacks = [
+    "service_smm",
+    "service_nakrutka",
+    "service_programming",
+    "service_design",
+    "service_ai",
+    "earn_money",
+    "top_up_balance",
+    "new_order",
+    "invite_friend",
+    "bonus_terms",
+    "back_main_menu",
+    "change_language",
+    "notifications",
+  ];
+
+  if (pendingCallbacks.includes(data)) {
+    await ctx.answerCallbackQuery(); // loadingni to‘xtatadi
+    await ctx.reply("⚠️ Yakuniga yetmagan");
+  }
+});
+
 // ⚙️ Commandlar
 bot.command("help", helpCommand);
 

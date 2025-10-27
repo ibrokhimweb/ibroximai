@@ -51,6 +51,7 @@ export const messageHandler = async (ctx: Context, next: NextFunction) => {
           },
         });
         break;
+
       case "💳 Mening hisobim":
         await ctx.reply(
           `
@@ -81,18 +82,86 @@ export const messageHandler = async (ctx: Context, next: NextFunction) => {
           }
         );
         break;
+
       case "🔎 Buyurtmalarim":
-        await ctx.reply("Siz buyurtmalaringizni tanladingiz!");
+        await ctx.reply(
+          "📦 *Sizning buyurtmalaringiz*\n\n❌ Buyurtmalar mavjud emas",
+          {
+            parse_mode: "Markdown",
+            reply_markup: {
+              inline_keyboard: [
+                [{ text: "🆕 Yangi buyurtma", callback_data: "new_order" }],
+              ],
+            },
+          }
+        );
         break;
-      case "💵 Hisob to'ldirish":
-        await ctx.reply("Hisobni to'ldirish bo‘limi ochildi!");
+
+      // 🎁 Bonuslar
+      case "🎁 Bonuslar":
+        await ctx.reply(
+          "🎁 *Bonuslar bo‘limi* — hozircha mavjud bonuslar yo‘q.",
+          {
+            parse_mode: "Markdown",
+            reply_markup: {
+              inline_keyboard: [
+                [
+                  {
+                    text: "💰 Do‘stni taklif qilish",
+                    callback_data: "invite_friend",
+                  },
+                  { text: "📜 Shartlar", callback_data: "bonus_terms" },
+                ],
+                [{ text: "⬅️ Ortga", callback_data: "back_main_menu" }],
+              ],
+            },
+          }
+        );
         break;
-      case "🚀 Kanalim":
-        await ctx.reply("Sizning kanalingiz ma’lumotlari:");
+
+      // 💬 Fikr bildirish
+      case "💬 Fikr bildirish":
+        await ctx.reply(
+          "💬 *Fikringiz biz uchun muhim!*\n\nBot haqida fikringizni yozing yoki taklif bildiring 👇",
+          { parse_mode: "Markdown" }
+        );
         break;
+
+      // ⚙️ Sozlamalar
+      case "⚙️ Sozlamalar":
+        await ctx.reply("⚙️ *Sozlamalar menyusi*", {
+          parse_mode: "Markdown",
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "🌐 Tilni o‘zgartirish",
+                  callback_data: "change_language",
+                },
+                { text: "🔔 Bildirishnomalar", callback_data: "notifications" },
+              ],
+            ],
+          },
+        });
+        break;
+
+      // ☎️ Qo‘llab-quvvatlash
       case "☎️ Qo'llab-quvvatlash":
-        await ctx.reply("Qo‘llab-quvvatlashga xush kelibsiz!");
+        await ctx.reply("☎️ *Qo‘llab-quvvatlash markazi*", {
+          parse_mode: "Markdown",
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "👨‍💻 Admin bilan bog‘lanish",
+                  url: "https://t.me/aiadmin",
+                },
+              ],
+            ],
+          },
+        });
         break;
+
       default:
         break;
     }
