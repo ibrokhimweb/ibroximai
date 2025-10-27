@@ -153,7 +153,7 @@ export const messageHandler = async (ctx: Context, next: NextFunction) => {
               [
                 {
                   text: "👨‍💻 Admin bilan bog‘lanish",
-                  url: "https://t.me/aiadmin",
+                  url: "https://t.me/AiDasturchi",
                 },
               ],
             ],
