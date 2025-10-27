@@ -14,18 +14,16 @@ export const mainMenuKeyboard = async (ctx: Context) => {
     .text("☎️ Qo'llab-quvvatlash")
     .resized(); // tugmalar o‘lchamini moslashtirish
 
-  const message = `🔥 <b>Assalomu alaykum!</b> @ibroximai botiga xush kelibsiz.
-    
-    Bu bot orqali siz quyidagilarni bajara olasiz 👇
-    
-    🎬 <b>Instagram</b> va <b>TikTok</b> havolasini yuboring — video faylni yuklab oling.  
-    📂 Istalgan turdagi faylni yuboring — uni ziplash, siqish yoki boshqa formatga (PDF ⇄ DOC ...) o‘tkazish mumkin.  
-    🔍 Shunchaki matn yuboring — bot sizga musiqa, film yoki boshqa ma’lumotlarni topib beradi.
-    
-    🚀 <b>Boshlash uchun biror havola yoki fayl yuboring!</b>      `.trim();
+  const message = `*Bu bot orqali siz quyidagilarni bajara olasiz 👇*
+
+🎬 *Instagram* va *TikTok* havolasini yuboring — video faylni yuklab oling  
+📂 Istalgan turdagi faylni yuboring va fayl ustida amallar bajaring
+🔍 Shunchaki matn yuboring — bot sizga musiqa, film yoki boshqa ma’lumotlarni topib beradi
+
+🚀 *Boshlash uchun biror havola, fayl yuboring yoki qo'shimcha imkoniyatlarda foydalaning\!*`.trim();
 
   await ctx.reply(message, {
-    parse_mode: "HTML",
+    parse_mode: "Markdown",
     reply_markup: menuKeyboard,
   });
 };
