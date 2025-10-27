@@ -1,9 +1,7 @@
 import { Bot } from "grammy";
-import * as cheerio from "cheerio";
 
 import { logger } from "../middlewares/logger.js";
 import { startCommand } from "./commands/start.js";
-import { helpCommand } from "./commands/help.js";
 import { contactHandler } from "./handlers/contact.js";
 import { registerUser } from "../middlewares/registerUser.ts.js";
 import { ensurePhone } from "../middlewares/ensurePhone.js";
@@ -11,9 +9,8 @@ import { checkSubscription } from "../middlewares/checkSubscription .js";
 import { confirmSubscription } from "./handlers/confirm_subscription.js";
 import { mediaHandler } from "./handlers/mediaDownload.js";
 import { messageHandler } from "./handlers/message.js";
-import { fileHandler } from "./handlers/file.js";
 import { lexicaHandler } from "./handlers/lexicaHandler.js";
-import axios from "axios";
+// import { fileHandler } from "./handlers/file.js";
 
 const bot = new Bot(process.env.BOT_TOKEN!);
 
@@ -55,7 +52,7 @@ bot.use(ensurePhone);
 bot.use(checkSubscription);
 
 // Handlers
-bot.on("message:file", fileHandler);
+// bot.on("message:file", fileHandler);
 bot.on("message:text", async (ctx, next) => {
   await mediaHandler(ctx, next); // agar media link bo‘lsa
   await messageHandler(ctx, next); // yoki tugma bosilgan bo‘lsa
@@ -94,11 +91,9 @@ bot.on("callback_query:data", async (ctx) => {
   }
 });
 
-// ⚙️ Commandlar
-bot.command("help", helpCommand);
-
-bot.command("profile", async (ctx) => {
-  await ctx.reply("👤 Sizning profilingiz:");
-});
+bot.api.setMyCommands([
+  { command: "start", description: "🔄️ Qayta ishga tushirish" },
+  // { command: "services", description: "🗂 Xizmatlarga buyurtma berish" },
+]);
 
 export { bot };

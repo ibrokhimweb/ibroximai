@@ -10,11 +10,7 @@ export const logger = async (ctx: Context, next: NextFunction) => {
   // 1️⃣ Oldingi xabarlarni o'chiramiz
   const messages = userMessages.get(chatId) || [];
   for (const msgId of messages) {
-    try {
-      await ctx.api.deleteMessage(chatId, msgId);
-    } catch (err) {
-      // Xabar allaqachon o'chirilgan bo'lishi mumkin
-    }
+    await ctx.api.deleteMessage(chatId, msgId);
   }
   userMessages.set(chatId, []);
 
